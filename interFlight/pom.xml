@@ -9,13 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>InterFlight</groupId>
-	<artifactId>Sensors</artifactId>
+	<artifactId>InterFlight</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Sensors</name>
+	<name>InterFlight</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
-                <start-class>InterFlight.Sensors.SensorsApplication</start-class>                
+                <start-class>InterFlight.interFlightApplication</start-class>                
 	</properties>
 	<dependencies>
 		<dependency>
