@@ -8,7 +8,7 @@ import InterFlight.Model.Flight;
 import java.io.IOException;
 import org.springframework.kafka.annotation.KafkaListener;
 
-//bin/kafka-topics.sh --create --topic interFlight --zookeeper localhost:2181 --partitions 1 --replication-factor 1
+
 
 @Service
 public class Consumer {
