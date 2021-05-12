@@ -1,18 +1,30 @@
 package InterFlight.Model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.sun.istack.NotNull;
 
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "flight")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Flight implements Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String icao24;
+    @NotNull
     private String originCountry;
-    private Long last_contact;
+    @NotNull
+    private String last_contact;
     private Float longitude;
     private Float latitude;
     private Float velocity;
@@ -22,7 +34,7 @@ public class Flight implements Serializable{
     {
     }
     
-    public Flight(String icao24,String originCountry, Long last_contact, Float longitude, Float latitude, Float velocity) {
+    public Flight(String icao24,String originCountry, String last_contact, Float longitude, Float latitude, Float velocity) {
         this.icao24 = icao24;
         this.originCountry = originCountry;
         this.last_contact = last_contact;
@@ -42,17 +54,12 @@ public class Flight implements Serializable{
             "}";
     }
 
-    public String getLast_contact() {
-
-        int seconds = (int) (System.currentTimeMillis() / 1000L - last_contact);
-        int minutes = seconds / 60; 
-        seconds %= 60;
-        String s = minutes + ":" + String.format("%02d", seconds);
-        return s;
-    }
-
     public Float getLongitude() {
         return this.longitude;
+    }
+
+    public String getLast_contact() {
+        return last_contact;
     }
     
         /**
@@ -100,7 +107,7 @@ public class Flight implements Serializable{
     /**
      * @param last_contact the last_contact to set
      */
-    public void setLast_contact(Long last_contact) {
+    public void setLast_contact(String last_contact) {
         this.last_contact = last_contact;
     }
 
