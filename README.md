@@ -6,7 +6,16 @@ Fazer docker compose up dos sensors e depois executar a app no netbeans(falta me
 
 
 #InterFlight
+
 Fazer docker compose para a base de dados e depois executar a app 
+
+
+
+
+
+
+
+
 
 
 
