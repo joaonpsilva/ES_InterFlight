@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.springframework.kafka.annotation.KafkaListener;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7bff883d97db0fdccb66fe405aefb279443573b5
 @Service
 public class Consumer {
     
