@@ -1,11 +1,21 @@
 # ES_InterFlight
 
-//Sensors
-Fazer docker compose up dos sensors e depois executar a app no netbeans(falta meter a app no docker comopse)
+#Sensors
+
+Fazer docker compose up dos sensors e depois executar a app no netbeans(falta meter a app no docker compose)
 
 
-//InterFlight
+#InterFlight
+
 Fazer docker compose para a base de dados e depois executar a app 
+
+
+
+
+
+
+
+
 
 
 
