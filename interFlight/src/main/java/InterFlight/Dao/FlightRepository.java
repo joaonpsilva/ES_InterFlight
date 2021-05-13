@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 
   Flight findById(long id);
-  Flight findByIcao24(String icao);
+  List<Flight> findByIcao24(String icao);
   List<Flight> findByOriginCountry(String originCountry);
 }

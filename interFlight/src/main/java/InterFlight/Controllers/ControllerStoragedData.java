@@ -7,6 +7,8 @@ package InterFlight.Controllers;
 
 import InterFlight.Model.Flight;
 import InterFlight.Services.RealTimeService;
+import InterFlight.Services.StoragedDataService;
+import java.util.List;
 import javax.lang.model.SourceVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +21,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class ControllerStoragedData {
     
     @Autowired
-    RealTimeService realtimeService;
+    StoragedDataService storagedDataServices;
 
     @GetMapping("/getPlane/{icao24}")
-    Flight getPlaneByIcao(@PathVariable String icao24)
+    List<Flight> getPlaneByIcao(@PathVariable String icao24)
     {
-      return null;  
+      return storagedDataServices.getSpecificPlane(icao24);  
+    }
+    
+    @GetMapping("/getAllPlanes")
+    List<Flight> getAllPlanes()
+    {
+      return storagedDataServices.getAllPlanes();  
     }
 
 }
