@@ -34,7 +34,7 @@ pipeline {
         stage('Create Docker Image') {
             steps {
                 parallel(
-                    kafkaConsumer: {
+                    sensors: {
                         dir('Sensors') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
@@ -45,7 +45,7 @@ pipeline {
                             }
                         }
                     },
-                    projectbackend: {
+                    interFlight: {
                         dir('interFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
@@ -62,7 +62,7 @@ pipeline {
         stage('Pushing Docker Image') {
             steps {
                 parallel(
-                    kafkaConsumer: {
+                    sensors: {
                         dir('Sensors') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
@@ -76,7 +76,7 @@ pipeline {
                             }
                         }
                     },
-                    projectbackend: {
+                    interFlight: {
                         dir('interFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
