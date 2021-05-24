@@ -5,8 +5,8 @@ pipeline {
     }
 
     environment {
-        registry = 'esp12/Sensors'
-        registry2 = 'esp12/interFlight'
+        registry = 'esp12/sensors'
+        registry2 = 'esp12/interflight'
         registryCredential = 'esp12dockerhub'
         dockerImage = ''
     }
