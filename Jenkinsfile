@@ -1,6 +1,6 @@
 pipeline {
     agent any
- tools {
+        tools {
         maven 'maven36'
     }
 
@@ -18,7 +18,7 @@ pipeline {
                 dir('Sensors') {
                         sh "chmod +x -R ${env.WORKSPACE}"
                         sh 'echo "Clean install on kafkaConsumer"'
-                        sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                        sh './mvnw clean install -DskipTests'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
                 dir('InterFlight') {
                     sh "chmod +x -R ${env.WORKSPACE}"
                     sh 'echo "Clean install on projectbackend"'
-                    sh 'mvn clean install -DskipTests'
+                    sh './mvnw clean install -DskipTests'
                 }
             }
         }
