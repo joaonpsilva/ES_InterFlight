@@ -42,7 +42,6 @@ pipeline {
             steps {
                 dir('Sensors') {
                         sh "chmod +x -R ${env.WORKSPACE}"
-                        sh 'echo "Clean install on Sensors"'
                         sh './mvnw clean install -DskipTests'
                 }
             }
@@ -51,7 +50,6 @@ pipeline {
             steps {
                 dir('interFlight') {
                     sh "chmod +x -R ${env.WORKSPACE}"
-                    sh 'echo "Clean install on InterFlight"'
                     sh 'mvn -Dmaven.test.failure.ignore=true install' 
                 }
             }
@@ -63,7 +61,6 @@ pipeline {
                         dir('Sensors') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Creating Docker Image on Sensors"'
                                 script {
                                     dockerImage = docker.build registry
                                 }
