@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Compilation kafkaConsumer') {
             steps {
-                dir('kafkaConsumer') {
+                dir('Sensors') {
                         sh "chmod +x -R ${env.WORKSPACE}"
                         sh 'echo "Clean install on kafkaConsumer"'
                         sh './mvnw clean install -DskipTests'
@@ -45,7 +45,7 @@ pipeline {
         }
         stage('Compilation projectbackend') {
             steps {
-                dir('projectbackend') {
+                dir('InterFlight') {
                     sh "chmod +x -R ${env.WORKSPACE}"
                     sh 'echo "Clean install on projectbackend"'
                     sh './mvnw clean install -DskipTests'
@@ -56,7 +56,7 @@ pipeline {
             steps {
                 parallel(
                     kafkaConsumer: {
-                        dir('kafkaConsumer') {
+                        dir('Sensors') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Creating Docker Image on kafkaConsumer"'
@@ -67,7 +67,7 @@ pipeline {
                         }
                     },
                     projectbackend: {
-                        dir('projectbackend') {
+                        dir('InterFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Creating Docker Image on projectbackend"'
@@ -84,7 +84,7 @@ pipeline {
             steps {
                 parallel(
                     kafkaConsumer: {
-                        dir('kafkaConsumer') {
+                        dir('Sensors') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Pushing Docker Image on kafkaConsumer"'
@@ -98,7 +98,7 @@ pipeline {
                         }
                     },
                     projectbackend: {
-                        dir('projectbackend') {
+                        dir('InterFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Pushing Docker Image on projectbackend"'
@@ -118,7 +118,7 @@ pipeline {
             steps {
                 parallel(
                     kafkaConsumer: {
-                        dir('kafkaConsumer') {
+                        dir('Sensors') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Removing docker image on kafkaConsumer"'
@@ -127,7 +127,7 @@ pipeline {
                         }
                     },
                     projectbackend: {
-                        dir('projectbackend') {
+                        dir('InterFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Removing docker image on projectbackend"'
