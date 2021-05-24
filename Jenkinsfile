@@ -13,20 +13,20 @@ pipeline {
 
     stages {
 
-        stage('Compilation kafkaConsumer') {
+        stage('Compilation Sensors') {
             steps {
                 dir('Sensors') {
                         sh "chmod +x -R ${env.WORKSPACE}"
-                        sh 'echo "Clean install on kafkaConsumer"'
+                        sh 'echo "Clean install on Sensors"'
                         sh './mvnw clean install -DskipTests'
                 }
             }
         }
-        stage('Compilation projectbackend') {
+        stage('Compilation InterFlight') {
             steps {
                 dir('InterFlight') {
                     sh "chmod +x -R ${env.WORKSPACE}"
-                    sh 'echo "Clean install on projectbackend"'
+                    sh 'echo "Clean install on InterFlight"'
                     sh './mvnw clean install -DskipTests'
                 }
             }
@@ -38,7 +38,7 @@ pipeline {
                         dir('Sensors') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Creating Docker Image on kafkaConsumer"'
+                                sh 'echo "Creating Docker Image on Sensors"'
                                 script {
                                     dockerImage = docker.build registry
                                 }
@@ -49,7 +49,7 @@ pipeline {
                         dir('InterFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Creating Docker Image on projectbackend"'
+                                sh 'echo "Creating Docker Image on InterFlight"'
                                 script {
                                     dockerImage2 = docker.build registry2
                                 }
@@ -66,7 +66,7 @@ pipeline {
                         dir('Sensors') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Pushing Docker Image on kafkaConsumer"'
+                                sh 'echo "Pushing Docker Image on Sensors"'
                                 script {
                                     docker.withRegistry( '', registryCredential ) {
                                         dockerImage.push("$BUILD_NUMBER")
@@ -80,7 +80,7 @@ pipeline {
                         dir('InterFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Pushing Docker Image on projectbackend"'
+                                sh 'echo "Pushing Docker Image on InterFlight"'
                                 script {
                                     docker.withRegistry( '', registryCredential ) {
                                         dockerImage2.push("$BUILD_NUMBER")
@@ -100,7 +100,7 @@ pipeline {
                         dir('Sensors') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Removing docker image on kafkaConsumer"'
+                                sh 'echo "Removing docker image on Sensors"'
                                 sh "docker rmi $registry:$BUILD_NUMBER"
                             }
                         }
@@ -109,7 +109,7 @@ pipeline {
                         dir('InterFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Removing docker image on projectbackend"'
+                                sh 'echo "Removing docker image on InterFlight"'
                                 sh "docker rmi $registry2:$BUILD_NUMBER"
                             }
                         }
