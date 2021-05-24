@@ -65,7 +65,7 @@ pipeline {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Creating Docker Image on Sensors"'
                                 script {
-                                    dockerImage = docker.build sensors
+                                    dockerImage = docker.build registry
                                 }
                             }
                         }
@@ -76,7 +76,7 @@ pipeline {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Creating Docker Image on InterFlight"'
                                 script {
-                                    dockerImage2 = docker.build interFlight
+                                    dockerImage2 = docker.build registry2
                                 }
                             }
                         }
