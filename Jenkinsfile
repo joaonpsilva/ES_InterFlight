@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         registry = 'esp12/Sensors'
-        registry2 = 'esp12/InterFlight'
+        registry2 = 'esp12/interFlight'
         registryCredential = 'esp12dockerhub'
         dockerImage = ''
     }
@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Compilation InterFlight') {
             steps {
-                dir('InterFlight') {
+                dir('interFlight') {
                     sh "chmod +x -R ${env.WORKSPACE}"
                     sh 'echo "Clean install on InterFlight"'
                     sh './mvnw clean install -DskipTests'
@@ -46,7 +46,7 @@ pipeline {
                         }
                     },
                     projectbackend: {
-                        dir('InterFlight') {
+                        dir('interFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Creating Docker Image on InterFlight"'
@@ -77,7 +77,7 @@ pipeline {
                         }
                     },
                     projectbackend: {
-                        dir('InterFlight') {
+                        dir('interFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Pushing Docker Image on InterFlight"'
@@ -106,7 +106,7 @@ pipeline {
                         }
                     },
                     projectbackend: {
-                        dir('InterFlight') {
+                        dir('interFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Removing docker image on InterFlight"'
