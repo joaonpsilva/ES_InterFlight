@@ -1,5 +1,8 @@
 pipeline {
     agent any
+ tools {
+        maven 'maven36'
+    }
 
     environment {
         registry = 'esp12/Sensors'
@@ -15,7 +18,7 @@ pipeline {
                 dir('Sensors') {
                         sh "chmod +x -R ${env.WORKSPACE}"
                         sh 'echo "Clean install on kafkaConsumer"'
-                        sh './mvnw clean install -DskipTests'
+                        sh 'mvn clean install -DskipTests'
                 }
             }
         }
@@ -24,7 +27,7 @@ pipeline {
                 dir('InterFlight') {
                     sh "chmod +x -R ${env.WORKSPACE}"
                     sh 'echo "Clean install on projectbackend"'
-                    sh './mvnw clean install -DskipTests'
+                    sh 'mvn clean install -DskipTests'
                 }
             }
         }
