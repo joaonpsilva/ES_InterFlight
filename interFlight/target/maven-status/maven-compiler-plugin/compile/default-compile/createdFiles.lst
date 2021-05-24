@@ -1,9 +1,10 @@
-InterFlight\interFlightApplication.class
 InterFlight\Model\Response.class
+InterFlight\Controllers\ControllerStoragedData.class
+InterFlight\interFlightApplication.class
 InterFlight\Dao\FlightRepository.class
+InterFlight\Controllers\ControllerRealTime.class
 InterFlight\Services\StoragedDataService.class
 InterFlight\Kafka\KafkaConfiguration.class
 InterFlight\Model\Flight.class
 InterFlight\Services\RealTimeService.class
-InterFlight\Controllers\Controller.class
 InterFlight\Kafka\Consumer.class
