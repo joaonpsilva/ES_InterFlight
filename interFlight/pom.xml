@@ -11,7 +11,7 @@
 	<groupId>InterFlight</groupId>
 	<artifactId>InterFlight</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>InterFlight</name>
+	<name>interFlight</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>8</java.version>
