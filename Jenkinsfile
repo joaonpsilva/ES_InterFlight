@@ -9,31 +9,7 @@ pipeline {
     }
 
     stages {
-        stage('Test Stage') {
-            steps {
-                parallel(
-                    kafkaConsumer: {
-                        dir('Sensors') {
-                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Tests on kafkaConsumer"'
-                                sh './mvnw test'
-                            }
-                        }
-                    },
-                    projectbackend: {
-                        dir('InterFlight') {
-                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Tests on projectbackend"'
-                                sh './mvnw test'
-                                sh 'echo "Error due to not having a database"'
-                            }
-                        }
-                    }
-                )
-            }
-        }
+
         stage('Compilation kafkaConsumer') {
             steps {
                 dir('Sensors') {
