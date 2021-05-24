@@ -18,7 +18,7 @@ pipeline {
                 dir('Sensors') {
                         sh "chmod +x -R ${env.WORKSPACE}"
                         sh 'echo "Clean install on kafkaConsumer"'
-                        sh 'mvn clean install -DskipTests'
+                        sh 'mvn -Dmaven.test.failure.ignore=true install' 
                 }
             }
         }
