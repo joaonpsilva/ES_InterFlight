@@ -21,11 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ControllerStoragedData {
     
     @Autowired
-    StoragedDataService storagedDataServices;
+    StoragedDataService storagedDataServices = new StoragedDataService();
 
     @GetMapping("/getPlane/{icao24}")
-    List<Flight> getPlaneByIcao(@PathVariable String icao24)
+    public String getPlaneByIcao(@PathVariable String icao24)
     {
+        // mudar para list de flights
       return storagedDataServices.getSpecificPlane(icao24);  
     }
     
