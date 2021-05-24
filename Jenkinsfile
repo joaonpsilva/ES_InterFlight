@@ -29,7 +29,7 @@ pipeline {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Tests on InterFlight"'
-                                sh './mvnw test'
+                                sh 'mvn test'
                                 sh 'echo "Error, missing Database"'
                             }
                         }
