@@ -27,7 +27,7 @@ pipeline {
                 dir('interFlight') {
                     sh "chmod +x -R ${env.WORKSPACE}"
                     sh 'echo "Clean install on InterFlight"'
-                    sh './mvnw clean install -DskipTests'
+                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
                 }
             }
         }
