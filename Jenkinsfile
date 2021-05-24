@@ -12,7 +12,7 @@ pipeline {
     }
 
     stages {
-        stage('Test Stage') {
+        stage('Testing Stage') {
             steps {
                 parallel(
                     sensors: {
@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Compilation Sensors') {
+        stage('Compile Sensors Project') {
             steps {
                 dir('Sensors') {
                         sh "chmod +x -R ${env.WORKSPACE}"
@@ -47,7 +47,7 @@ pipeline {
                 }
             }
         }
-        stage('Compilation InterFlight') {
+        stage('Compile InterFlight Project') {
             steps {
                 dir('interFlight') {
                     sh "chmod +x -R ${env.WORKSPACE}"
@@ -56,7 +56,7 @@ pipeline {
                 }
             }
         }
-        stage('Create Docker Image') {
+        stage('Creating Docker Image') {
             steps {
                 parallel(
                     sensors: {
