@@ -21,7 +21,8 @@ public class ControllerStoragedDataTest {
     void getPlane(){
         ControllerStoragedData controller = new ControllerStoragedData();
         String response = controller.getPlaneByIcao("ac130");
-        assertEquals("ac130",response);
+        
+        assertEquals("ac130",response); 
     }
 
 }
