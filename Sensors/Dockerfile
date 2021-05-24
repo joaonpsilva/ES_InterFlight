@@ -1,3 +1,3 @@
-FROM openjdk:11
-COPY target/Sensors-0.0.1-SNAPSHOT.jar Sensors.jar
-ENTRYPOINT ["java","-jar","/Sensors.jar"]
+FROM openjdk:8
+COPY target/sensors-0.0.1-SNAPSHOT.jar sensors.jar
+ENTRYPOINT ["java","-jar","/sensors.jar"]
