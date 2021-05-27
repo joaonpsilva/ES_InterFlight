@@ -11,12 +11,18 @@ import InterFlight.Sensors.Model.Flight;
 @Service
 public class Producer {
     
-    private static final String TOPIC = "interFlight";
+    private static final String flightInfo = "flightInfo";
+    private static final String flightterminated = "flightTerminated";
+
 
     @Autowired
     private KafkaTemplate<String, Flight> kafkaTemplate;
 
-    public void send(Flight message) {
-        this.kafkaTemplate.send(TOPIC, message);
+    public void sendFlightUpdate(Flight message) {
+        this.kafkaTemplate.send(flightInfo, message);
+    }
+
+    public void sendFlightTerminated(Flight message) {
+        this.kafkaTemplate.send(flightterminated, message);
     }
 }
