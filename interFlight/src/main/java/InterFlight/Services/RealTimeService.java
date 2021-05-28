@@ -24,7 +24,7 @@ public class RealTimeService {
 
     @KafkaListener(topics = flightInfo, groupId = "1")
     public void consumeUpdate(String message) throws IOException {
-        System.out.println("## -> Consumed message -> " +message);
+        System.out.println("## -> REALTIME Consumed message -> " +message);
         Flight flight = objectMapper.readValue(message, Flight.class);
         
         realTimeFlights.put(flight.getIcao24(), flight);
@@ -32,7 +32,7 @@ public class RealTimeService {
 
     @KafkaListener(topics = flightterminated, groupId = "1")    //remove flights from the list
     public void consumeTerminated(String message) throws IOException {
-        System.out.println("## -> Flight Over -> " +message);
+        System.out.println("## -> REALTIME Flight Over -> " +message);
         Flight flight = objectMapper.readValue(message, Flight.class);
         
         realTimeFlights.remove(flight.getIcao24());

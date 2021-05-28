@@ -26,9 +26,9 @@ public class SpotterService {
 
     @KafkaListener(topics = flightInfo, groupId = "2")
     public void consumeUpdate(String message) throws IOException {
+        System.out.println("## -> SPOTTER Consumed message -> " +message);
         Flight flight = objectMapper.readValue(message, Flight.class);
         String model = InferModel(flight.getIcao24());
-        System.out.print("SPOTTER RECEIVED INFO");
         if (!knownmodels.containsKey(model))
             knownmodels.put(model, new HashSet<Flight>());
 
@@ -42,9 +42,10 @@ public class SpotterService {
 
     @KafkaListener(topics = flightterminated, groupId = "2")    //remove flights from the list
     public void consumeTerminated(String message) throws IOException {
+        System.out.println("## -> SPOTTER Flight Over -> " +message);
+
         Flight flight = objectMapper.readValue(message, Flight.class);
         String model = InferModel(flight.getIcao24());
-        System.out.print("SPOTTER RECEIVED TERMINATED");
         
         //Maybe persist this?
         knownmodels.get(model).remove(flight);
@@ -54,7 +55,7 @@ public class SpotterService {
     /*Dummy way of getting the plane model*/
     private String InferModel(String icao24){
         String[] models = {"ModelA", "ModelB", "ModelC", "ModelD"};
-        return models[icao24.hashCode() % 4];
+        return models[Math.abs(icao24.hashCode()) % 4];
     }
     
 }

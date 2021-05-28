@@ -70,7 +70,7 @@ public class Flight implements Serializable{
         
         // comparing the state of argument with 
         // the state of 'this' Object.
-        return compFlight.getIcao24() == this.getIcao24();
+        return compFlight.getIcao24().equals(this.getIcao24());
     }
 
     @Override
