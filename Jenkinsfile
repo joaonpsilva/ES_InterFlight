@@ -12,7 +12,7 @@ pipeline {
     }
 
     stages {
-        stage('Testing Stage') {
+       /* stage('Testing Stage') {
             steps {
                 parallel(
                     sensors: {
@@ -36,7 +36,7 @@ pipeline {
                     }
                 )
             }
-        }
+        }*/
 
         stage('Compile Sensors Project') {
             steps {
@@ -63,7 +63,7 @@ pipeline {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 script {
                                     docker.withRegistry("http://192.168.160.48:5000") {
-                                        dockerImage = docker.build("es_interflight/sensors", "Sensors")
+                                        dockerImage = docker.build("es_interflight/sensors", "/Sensors")
                                         }                                    
                                 }
                             }
