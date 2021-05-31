@@ -116,30 +116,29 @@ pipeline {
                 )
             }
         }
-        stage('Removing Docker Image') {
+        stage('Deploying') {
             steps {
-                parallel(
-                    sensors: {
-                        dir('Sensors') {
-                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Removing docker image on Sensors"'
-                                sh "docker rmi $registry:$BUILD_NUMBER"
-                            }
-                        }
-                    },
-                    interflight: {
-                        dir('interFlight') {
-                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Removing docker image on InterFlight"'
-                                sh "docker rmi $registry2:$BUILD_NUMBER"
-                            }
-                        }
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh 'echo "Deploying"'
+                withCredentials([usernamePassword(credentialsId: 'esp12_ssh', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+
+                    echo "$remote.host"
+
+                    script {
+                        remote.user = USERNAME
+                        remote.password = PASSWORD
+                        remote.allowAnyHosts = true
+
                     }
-                )
-            }
-        }
+
+                    echo "$remote.user"
+
+                    sshCommand remote: remote, command: "docker stop esp12_sensors || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rm esp12_sensors || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/es_interflight/sensors || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/es_interflight/sensors"
+                    sshCommand remote: remote, command: "docker create -p 12025:12025 --name esp12_sensors 192.168.160.48:5000/es_interflight/sensors"
+                    sshCommand remote: remote, command: "docker start esp12_sensors"
     }
 }
 
