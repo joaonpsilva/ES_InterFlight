@@ -139,6 +139,10 @@ pipeline {
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/es_interflight/sensors"
                     sshCommand remote: remote, command: "docker create -p 12025:12025 --name esp12_sensors 192.168.160.48:5000/es_interflight/sensors"
                     sshCommand remote: remote, command: "docker start esp12_sensors"
+                }
+            }
+        }
     }
 }
+
 
