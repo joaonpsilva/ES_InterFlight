@@ -62,7 +62,9 @@ pipeline {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 script {
-                                    dockerImage = docker.build registry
+                                    docker.withRegistry("http://192.168.160.48:5000") {
+                                        dockerImage = docker.build("ES_InterFlight/Sensors", "Sensors")
+                                        }                                    
                                 }
                             }
                         }
@@ -73,7 +75,10 @@ pipeline {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Creating Docker Image on InterFlight"'
                                 script {
-                                    dockerImage2 = docker.build registry2
+                                    docker.withRegistry("http://192.168.160.48:5000") {
+                                        dockerImage2 = docker.build registry2
+                                        
+                                        }
                                 }
                             }
                         }
@@ -90,9 +95,8 @@ pipeline {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Pushing Docker Image on Sensors"'
                                 script {
-                                    docker.withRegistry( '', registryCredential ) {
-                                        dockerImage.push("$BUILD_NUMBER")
-                                        dockerImage.push('latest')
+                                    docker.withRegistry("http://192.168.160.48:5000") {
+                                        dockerImage.push()
                                     }
                                 }
                             }
@@ -104,9 +108,8 @@ pipeline {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Pushing Docker Image on InterFlight"'
                                 script {
-                                    docker.withRegistry( '', registryCredential ) {
-                                        dockerImage2.push("$BUILD_NUMBER")
-                                        dockerImage2.push('latest')
+                                    docker.withRegistry("http://192.168.160.48:5000") {
+                                        dockerImage2.push()
                                     }
                                 }
                             }
