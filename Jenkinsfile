@@ -63,7 +63,7 @@ pipeline {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 script {
                                     docker.withRegistry("http://192.168.160.48:5000") {
-                                        dockerImage = docker.build("ES_InterFlight/Sensors", "Sensors")
+                                        dockerImage = docker.build("es_interflight/sensors", "Sensors")
                                         }                                    
                                 }
                             }
