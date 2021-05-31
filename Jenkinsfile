@@ -1,3 +1,7 @@
+def remote = [:]
+remote.host = '192.168.160.87'
+remote.name = 'playground'
+
 pipeline {
     agent any
         tools {
