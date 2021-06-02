@@ -62,6 +62,13 @@ public class ApiCaller {
             }
         }
 
+        for (Flight f : newflights){         //iterate over new flight data and check if any plane is new
+            if (!this.flights.contains(f)){
+                logger.debug("Flight Initiated " + f);
+                kafkaProducer.sendFlightInitiated(f);
+            }
+        }
+
         this.flights = newflights;
     }
 }

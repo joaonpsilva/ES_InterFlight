@@ -13,6 +13,7 @@ public class Producer {
     
     private static final String flightInfo = "flightInfo";
     private static final String flightterminated = "flightTerminated";
+    private static final String flightinit = "flightInitiated";
 
 
     @Autowired
@@ -24,5 +25,9 @@ public class Producer {
 
     public void sendFlightTerminated(Flight message) {
         this.kafkaTemplate.send(flightterminated, message);
+    }
+
+    public void sendFlightInitiated(Flight message) {
+        this.kafkaTemplate.send(flightinit, message);
     }
 }
