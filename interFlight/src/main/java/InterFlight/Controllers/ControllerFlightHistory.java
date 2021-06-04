@@ -1,2 +1,9 @@
-package InterFlight.Controllers;public class ControllerFlightHistory {
+package InterFlight.Controllers;
+
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class ControllerFlightHistory {
+
 }
