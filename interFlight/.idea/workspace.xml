@@ -49,7 +49,7 @@
       <recent name="C:\Users\migue\OneDrive\Documentos\GitHub\ES_InterFlight\interFlight\src\test\resources\features" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in InterFlight (2)">
+  <component name="RunManager" selected="JUnit.All in InterFlight (3)">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -77,7 +77,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in InterFlight (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in InterFlight (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="InterFlight" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -112,19 +112,19 @@
     </configuration>
     <list>
       <item itemvalue="Spring Boot.interFlightApplication" />
-      <item itemvalue="JUnit.All in InterFlight (4)" />
       <item itemvalue="JUnit.All in InterFlight (5)" />
       <item itemvalue="JUnit.All in InterFlight" />
       <item itemvalue="JUnit.All in InterFlight (1)" />
       <item itemvalue="JUnit.All in InterFlight (2)" />
+      <item itemvalue="JUnit.All in InterFlight (3)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in InterFlight (3)" />
         <item itemvalue="JUnit.All in InterFlight (2)" />
         <item itemvalue="JUnit.All in InterFlight (1)" />
         <item itemvalue="JUnit.All in InterFlight" />
         <item itemvalue="JUnit.All in InterFlight (5)" />
-        <item itemvalue="JUnit.All in InterFlight (4)" />
       </list>
     </recent_temporary>
   </component>
