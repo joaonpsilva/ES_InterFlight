@@ -33,7 +33,7 @@ pipeline {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Tests on InterFlight"'
-                                sh 'mvn clean test'
+                                sh 'mvn test'
                             }
                         }
                     }
