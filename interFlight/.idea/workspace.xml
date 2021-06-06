@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="462276b4-850a-4dcd-891c-847f5593d9ab" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.2\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ta5db5ZWUB1NsfMqj5sPcUbUDQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Sensors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\migue\OneDrive\Documentos\GitHub\ES_InterFlight\interFlight\src\test\resources\features" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.All in InterFlight">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in InterFlight (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="InterFlight" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in InterFlight (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="InterFlight" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in InterFlight (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="InterFlight" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in InterFlight (5)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="InterFlight" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in InterFlight" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="InterFlight" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="interFlightApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="InterFlight" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="InterFlight.interFlightApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=8082" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.All in InterFlight (2)" />
+      <item itemvalue="Spring Boot.interFlightApplication" />
+      <item itemvalue="JUnit.All in InterFlight (3)" />
+      <item itemvalue="JUnit.All in InterFlight (4)" />
+      <item itemvalue="JUnit.All in InterFlight (5)" />
+      <item itemvalue="JUnit.All in InterFlight" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in InterFlight" />
+        <item itemvalue="JUnit.All in InterFlight (5)" />
+        <item itemvalue="JUnit.All in InterFlight (4)" />
+        <item itemvalue="JUnit.All in InterFlight (3)" />
+        <item itemvalue="JUnit.All in InterFlight (2)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="462276b4-850a-4dcd-891c-847f5593d9ab" name="Default Changelist" comment="" />
+      <created>1622994450337</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622994450337</updated>
+      <workItem from="1622994451479" duration="1879000" />
+      <workItem from="1623010573113" duration="2583000" />
+      <workItem from="1623013365131" duration="841000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="382" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1622995100376">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="382" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1622995100376" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1623012174871">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1623012174871" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1622994642741">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1622994642741" />
+    <state width="1493" height="283" key="GridCell.Tab.0.bottom" timestamp="1623014162581">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="283" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1623014162581" />
+    <state width="1493" height="283" key="GridCell.Tab.0.center" timestamp="1623014162580">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="283" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1623014162580" />
+    <state width="1493" height="283" key="GridCell.Tab.0.left" timestamp="1623014162580">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="283" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1623014162580" />
+    <state width="1493" height="283" key="GridCell.Tab.0.right" timestamp="1623014162580">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="283" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1623014162580" />
+    <state width="1493" height="345" key="GridCell.Tab.1.bottom" timestamp="1622995927786">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="345" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1622995927786" />
+    <state width="1493" height="345" key="GridCell.Tab.1.center" timestamp="1622995927786">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="345" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1622995927786" />
+    <state width="1493" height="345" key="GridCell.Tab.1.left" timestamp="1622995927786">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="345" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1622995927786" />
+    <state width="1493" height="345" key="GridCell.Tab.1.right" timestamp="1622995927786">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="345" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1622995927786" />
+    <state x="560" y="91" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1623011632449">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="560" y="91" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1623011632449" />
+  </component>
+</project>
