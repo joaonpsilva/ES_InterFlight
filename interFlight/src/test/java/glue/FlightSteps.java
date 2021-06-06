@@ -22,9 +22,6 @@ public class FlightSteps {
     private TestRestTemplate testRestTemplate;
 
     @Autowired
-    private FlightRepository flightRepository;
-
-    @Autowired
     private ObjectMapper objectMapper;
 
     private List<Flight> expectedFlights;
@@ -36,14 +33,12 @@ public class FlightSteps {
     {
         expectedFlights = new ArrayList<>();
         actualFlights = new ArrayList<>();
-        flightRepository.deleteAll();
     }
 
     @Given("^the the following flights$")
     public void givenTheFollowingFlights(final List<Flight> flights)
     {
         expectedFlights.addAll(flights);
-        flightRepository.saveAll(flights);
     }
 
     @When("^the user requests all the flights$")
