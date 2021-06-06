@@ -16,7 +16,7 @@ pipeline {
     }
 
     stages {
-       /* stage('Testing Stage') {
+        stage('Testing Stage') {
             steps {
                 parallel(
                     sensors: {
@@ -34,13 +34,12 @@ pipeline {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Tests on InterFlight"'
                                 sh 'mvn test'
-                                sh 'echo "Error, missing Database"'
                             }
                         }
                     }
                 )
             }
-        }*/
+        }
 
         stage('Compile Sensors Project') {
             steps {
