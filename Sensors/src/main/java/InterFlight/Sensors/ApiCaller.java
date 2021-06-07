@@ -27,28 +27,46 @@ public class ApiCaller {
 
     final static Logger logger = Logger.getLogger(ApiCaller.class);
     
-    private List<Flight> flights = new ArrayList<>();
+    private Set<Flight> flights = new HashSet<>();
 
     @Scheduled(fixedDelay = 10000L) //10 segs
     void callApi() throws InterruptedException {
         
         String url = "https://opensky-network.org/api/states/all?lamin=37.002553&lomin=-8.767090&lamax=42.163403&lomax=3.120117";
         Response response = this.restTemplate.getForObject(url, Response.class);
-        logger.debug("RECEIVED");
+        logger.debug("RECEIVED-----------------------------");
 
-        List<Flight> newflights = new ArrayList<>();
+        Set<Flight> newflights = new HashSet<>();   //new flight information
+
         for (String[] state : response.getStates()){
-
-            Flight flight = new Flight(state[0], 
-                                    state[2], 
-                                    Long.parseLong(state[4]), 
-                                    Float.parseFloat(state[5]), 
-                                    Float.parseFloat(state[6]), 
-                                    Float.parseFloat(state[9]));
+            try{
+                Flight flight = new Flight(state[0], 
+                                            state[2], 
+                                            Long.parseLong(state[4]), 
+                                            Float.parseFloat(state[5]), 
+                                            Float.parseFloat(state[6]), 
+                                            Float.parseFloat(state[9]));
+                            
             
-            logger.debug(flight);
-            kafkaProducer.send(flight);
-            newflights.add(flight);
+                logger.debug("New Info " + flight);
+                kafkaProducer.sendFlightUpdate(flight);
+                newflights.add(flight);
+            }catch(Exception e){}
+
+        }
+
+        for (Flight f : this.flights){      //iterate over old flight data and check if any plane is missing
+            if (!newflights.contains(f)){
+                logger.debug("Flight OVER " + f);
+                kafkaProducer.sendFlightTerminated(f);
+            }
+        }
+
+        for (Flight f : newflights){         //iterate over new flight data and check if any plane is new
+            if (!this.flights.contains(f)){
+                logger.debug("Flight Initiated " + f);
+                kafkaProducer.sendFlightInitiated(f);
+            }
         }
 
         this.flights = newflights;

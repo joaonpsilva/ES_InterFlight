@@ -11,13 +11,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @RunWith(Cucumber.class)
 @CucumberContextConfiguration
 @SpringBootTest(classes = {interFlightApplication.class,
-                            CucumberITTests.class},
+                            CucumberITTest.class},
                             webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 @CucumberOptions(plugin = {"pretty"}, tags = "",features="src/test/resources/features")
-public class CucumberITTests {
+public class CucumberITTest {
     
-     @Test
+    @Test
     void getPlane(){
         ControllerStoragedData controller = new ControllerStoragedData();
         String response = controller.getPlaneByIcao("ac130");
