@@ -42,6 +42,32 @@ public class Flight implements Serializable{
             "}";
     }
 
+    @Override
+    public boolean equals(Object other){
+        // if both the object references are 
+        // referring to the same object.
+        if(this == other)
+            return true;
+        
+        //check class
+        if(other == null || other.getClass()!= this.getClass())
+            return false;
+        
+        // type casting of the argument. 
+        Flight compFlight = (Flight) other;
+        
+        // comparing the state of argument with 
+        // the state of 'this' Object.
+        return compFlight.getIcao24().equals(this.getIcao24());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.icao24.hashCode();  //icao is unique
+    }
+
+
     public String getLast_contact() {
 
         int seconds = (int) (System.currentTimeMillis() / 1000L - last_contact);

@@ -16,7 +16,7 @@ pipeline {
     }
 
     stages {
-       /* stage('Testing Stage') {
+        stage('Testing Stage') {
             steps {
                 parallel(
                     sensors: {
@@ -40,7 +40,7 @@ pipeline {
                     }
                 )
             }
-        }*/
+        }
 
         stage('Compile Sensors Project') {
             steps {
@@ -72,23 +72,21 @@ pipeline {
                         }
                     },
                     interFlight: {
-                        dir('interFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Creating Docker Image on InterFlight"'
                                 script {
                                     docker.withRegistry("http://192.168.160.48:5000") {
-                                        dockerImage2 = docker.build registry2
+                                        dockerImage2 = docker.build("es_interflight/interflight", "interFlight")
                                         
                                         }
                                 }
                             }
                         }
-                    }
                 )
             }
         }
-        stage('Pushing Docker Image') {
+        stage('Pushing Docker Image') { 
             steps {
                 parallel(
                     sensors: {
@@ -143,6 +141,14 @@ pipeline {
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/es_interflight/sensors"
                     sshCommand remote: remote, command: "docker create -p 12025:12025 --name esp12_sensors 192.168.160.48:5000/es_interflight/sensors"
                     sshCommand remote: remote, command: "docker start esp12_sensors"
+                    
+                    
+                    sshCommand remote: remote, command: 'docker stop esp12_interflight || echo "Do not have that image"'
+                    sshCommand remote: remote, command: 'docker rm esp12_interflight || echo "Do not have that image"'
+                    sshCommand remote: remote, command: 'docker rmi 192.168.160.48:5000/es_interflight/interflight || echo "Do not have that image"'
+                    sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/es_interflight/interflight"
+                    sshCommand remote: remote, command: "docker create -p 12026:12026 --name esp12_interflight 192.168.160.48:5000/es_interflight/interflight"
+                    sshCommand remote: remote, command: "docker start esp12_interflight"
 
                     
                 }
