@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RealTimeService {
 
-    private static final String TOPIC = "interFlight";
+    private static final String TOPIC = "flightInfo";
     
     ObjectMapper objectMapper = new ObjectMapper();
     //ArrayList with all the Refresh data 
