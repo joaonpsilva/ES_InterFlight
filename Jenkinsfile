@@ -43,17 +43,6 @@ pipeline {
         }
 
 
-        
-		stage ('Deploying Artifact') {
-            steps{
-                dir("interFlight"){
-				    sh 'mvn deploy -f pom.xml -s' 
-			    }
-            }
-        }
-
-
-
         stage('Compile Sensors Project') {
             steps {
                 dir('Sensors') {
