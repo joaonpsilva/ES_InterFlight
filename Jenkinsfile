@@ -47,7 +47,7 @@ pipeline {
 		stage ('Deploying Artifact') {
             steps{
                 dir("interFlight"){
-				    sh 'mvn deploy -f pom.xml -s settings.xml' 
+				    sh 'mvn deploy -f pom.xml -s' 
 			    }
             }
         }
