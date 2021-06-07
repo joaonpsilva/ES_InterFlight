@@ -1,0 +1,4 @@
+CucumberConfiguration.class
+CucumberITTest.class
+InterFlight/SensorsApplicationTests.class
+glue/FlightSteps.class
