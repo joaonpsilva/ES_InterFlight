@@ -86,7 +86,7 @@ pipeline {
                 )
             }
         }
-        stage('Pushing Docker Image') {
+        stage('Pushing Docker Image') { 
             steps {
                 parallel(
                     sensors: {
@@ -147,7 +147,7 @@ pipeline {
                     sshCommand remote: remote, command: 'docker rm esp12_interflight || echo "Do not have that image"'
                     sshCommand remote: remote, command: 'docker rmi 192.168.160.48:5000/es_interflight/interflight || echo "Do not have that image"'
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/es_interflight/interflight"
-                    sshCommand remote: remote, command: "docker create -p 12025:12025 --name esp12_interflight 192.168.160.48:5000/es_interflight/interflight"
+                    sshCommand remote: remote, command: "docker create -p 12025:12026 --name esp12_interflight 192.168.160.48:5000/es_interflight/interflight"
                     sshCommand remote: remote, command: "docker start esp12_interflight"
 
                     
