@@ -77,7 +77,7 @@ pipeline {
                                 sh 'echo "Creating Docker Image on InterFlight"'
                                 script {
                                     docker.withRegistry("http://192.168.160.48:5000") {
-                                        dockerImage2 = docker.build("es_interflight/interflight", "InterFlight")
+                                        dockerImage2 = docker.build("es_interflight/interflight", "interFlight")
                                         
                                         }
                                 }
