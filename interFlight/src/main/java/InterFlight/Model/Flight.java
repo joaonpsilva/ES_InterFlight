@@ -21,9 +21,7 @@ public class Flight implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String icao24;
-    @NotNull
     private String originCountry;
-    @NotNull
     private String last_contact;
     private Float longitude;
     private Float latitude;

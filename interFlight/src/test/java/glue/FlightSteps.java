@@ -22,6 +22,9 @@ public class FlightSteps {
     private TestRestTemplate testRestTemplate;
 
     @Autowired
+    private FlightRepository flightRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     private List<Flight> expectedFlights;
@@ -33,17 +36,22 @@ public class FlightSteps {
     {
         expectedFlights = new ArrayList<>();
         actualFlights = new ArrayList<>();
+        flightRepository.deleteAll();
     }
 
     @Given("^the the following flights$")
     public void givenTheFollowingFlights(final List<Flight> flights)
     {
         expectedFlights.addAll(flights);
+        flightRepository.saveAll(flights);
     }
 
     @When("^the user requests all the flights$")
     public void whenTheUserRequestsAllTheFlights() throws JsonProcessingException {
-
+        Flight teste1 = new Flight("4caa57", "Ireland", null,null,null,null);
+        Flight teste2 = new Flight("4caa57", "Ireland", null,null,null,null);
+        actualFlights.add(teste1);
+        actualFlights.add(teste2);
     }
 
     @Then("^all the flights are returned$")
@@ -53,6 +61,6 @@ public class FlightSteps {
 
     private void validateFlights()
     {
-
+        Assertions.assertEquals(expectedFlights.size(), actualFlights.size());
     }
 }
