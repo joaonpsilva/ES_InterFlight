@@ -77,7 +77,7 @@ pipeline {
                         dir('interFlight') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 echo 'Deploying Artifact'
-                                sh './mvnw deploy -DskipTests -f pom.xml -s ../settings.xml'
+                                sh 'mvn deploy -DskipTests -f pom.xml -s ../settings.xml'
                             }
                         }
                     }
