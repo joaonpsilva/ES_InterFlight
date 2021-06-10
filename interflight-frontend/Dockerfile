@@ -1,19 +1,21 @@
-FROM node:latest
-ENV PATH /app/node_modules/.bin:$PATH
-
+FROM node:alpine
 # set working directory
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json*", "./"]
-COPY . ./
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-RUN npm install
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install --silent
+RUN chown -R node.node /app
+RUN npm install react-scripts@3.4.1 -g --silent
 RUN npm install react react-dom leaflet
 RUN npm install react-leaflet
 RUN npm install -D @types/leaflet
-
-# port in the Runtime VM
-EXPOSE 50003
+# add app
+COPY . ./
 
 # start app
 CMD ["npm", "start"]
