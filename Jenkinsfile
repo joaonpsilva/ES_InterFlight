@@ -43,6 +43,8 @@ pipeline {
         }
 
 
+
+
         stage('Compile Sensors Project') {
             steps {
                 dir('Sensors') {
@@ -59,6 +61,31 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploying Artifact') {
+            steps {
+                parallel(
+                    sensors: {
+                        dir('Sensors') {
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                echo 'Deploying Artifact'
+                                sh './mvnw deploy -f pom.xml -s ../settings.xml'
+                            }
+                        }
+                    },
+                    interFlight: {
+                        dir('interFlight') {
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                echo 'Deploying Artifact'
+                                sh './mvnw deploy -DskipTests -f pom.xml -s ../settings.xml'
+                            }
+                        }
+                    }
+                )
+            }
+        }
+
+
         stage('Creating Docker Image') {
             steps {
                 parallel(
