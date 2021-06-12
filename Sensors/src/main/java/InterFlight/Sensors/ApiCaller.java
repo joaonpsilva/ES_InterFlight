@@ -31,8 +31,7 @@ public class ApiCaller {
 
     @Scheduled(fixedDelay = 10000L) //10 segs
     void callApi() throws InterruptedException {
-        
-        String url = "https://opensky-network.org/api/states/all?lamin=37.002553&lomin=-8.767090&lamax=42.163403&lomax=3.120117";
+        String url = "https://opensky-network.org/api/states/all?lamin=35.975495&lomin=-10.363099&lamax=71.145871&lomax=41.960568";
         Response response = this.restTemplate.getForObject(url, Response.class);
         logger.debug("RECEIVED-----------------------------");
 
