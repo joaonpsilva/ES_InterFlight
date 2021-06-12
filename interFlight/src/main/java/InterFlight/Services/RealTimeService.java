@@ -18,8 +18,6 @@ public class RealTimeService {
     private static final String flightterminated = "flightTerminated";
 
     ObjectMapper objectMapper = new ObjectMapper();
-    //ArrayList with all the Refresh data 
-    //!!!!!!!!!!!!!!!!!!! Falta retirar os avioes que aterram no array. (Talvez criar um evento para ver quais sao os avioes que aterram para os retirar deste arrayList??)
     Map<String, Flight> realTimeFlights = new HashMap<>(); 
 
     @KafkaListener(topics = flightInfo, groupId = "1")
@@ -46,9 +44,15 @@ public class RealTimeService {
     }
 
     //Ir buscar so os avioes de um certo pais
-    public ArrayList<Flight> getFlightsFiltered(String country){
+    public List<Flight> getFlightsFiltered(String country){
+        List<Flight> toReturn = new ArrayList<>();
+        for (Flight f : realTimeFlights.values()){
+            if (f.getOriginCountry().equals(country)){
+                toReturn.add(f);
+            }
 
-        return null;
+        }
+        return toReturn;
     }
     
     //Ir buscar so os avioes de um certo modelo
