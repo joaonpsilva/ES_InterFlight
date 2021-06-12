@@ -28,7 +28,8 @@ class Dashboard extends React.Component{
     this.state = {
       flights: []
     };
-    connect("/realtime/getAllPlanes", this)
+    this.endpoint = "/realtime/getAllPlanes"
+    connect(this.endpoint, this)
 
   }
   
@@ -38,10 +39,12 @@ class Dashboard extends React.Component{
 
 
   handleCountry(){
-    connect("/realtime/getPlanesByCountry?value=" + document.getElementById("/streamOriginCountry").value, this )
+    this.endpoint = "/realtime/getPlanesByCountry?value=" + document.getElementById("/streamOriginCountry").value
+    connect(this.endpoint, this)
   }
   handleIcao24(){
-    connect("/realtime/getPlane?value=" + document.getElementById("/streamAircraft").value, this )
+    this.endpoint = "/realtime/getPlane?value=" + document.getElementById("/streamAircraft").value
+    connect(this.endpoint, this)
   }
 
   render(){
@@ -87,10 +90,19 @@ class Dashboard extends React.Component{
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   
                 />
-                {this.state.flights.map((flight, idx) => 
-                  <Marker key={'marker-${idx}'} position={[flight.latitude, flight.longitude]}>
-                </Marker>
-                )}
+                {this.endpoint.localeCompare("/realtime/getAllPlanes") ? 
+                  this.state.flights.map((flight, idx) => 
+                    <Marker key={'marker-${idx}'} position={[flight.latitude, flight.longitude]}>
+                        <Popup>
+                          <span>
+                            Icao24: {flight.icao24}
+                            <br/>
+                            Velocity: {flight.velocity}
+                          </span>
+                        </Popup>
+                    </Marker>
+                  )
+                  : console.log("Not putting everything on the map")}
               </MapContainer>
 
               </Card>
