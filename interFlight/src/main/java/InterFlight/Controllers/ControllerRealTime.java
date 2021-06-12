@@ -36,12 +36,16 @@ public class ControllerRealTime {
             .map(interval -> Collections.singletonList(new FilghtData(realtimeService.getSpecificPlane(plane))))
             .flatMapIterable(flights -> flights);
     }
+
+    @GetMapping(value = "/getPlaneByCountry", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<FilghtData> streamByCountry(@RequestParam(name = "value") String country)
+    {   
+
+        return Flux.interval(Duration.ofSeconds(0), Duration.ofSeconds(12))
+            .map(interval -> Collections.singletonList(new FilghtData(realtimeService.getFlightsFiltered(country))))
+            .flatMapIterable(flights -> flights);
+    }
     
-    /*@GetMapping("/getAllPlanes")
-    List<Flight> getAllPlanes ()
-    {
-        return realtimeService.getAllPlanes();
-    }*/
 
     @GetMapping(value = "/getAllPlanes", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<FilghtData> streamAll()
