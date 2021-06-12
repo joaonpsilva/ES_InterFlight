@@ -38,7 +38,7 @@ class Dashboard extends React.Component{
 
 
   handleCountry(){
-    connect("/realtime/streamOriginCountry?value=" + document.getElementById("/streamOriginCountry").value, this )
+    connect("/realtime/getPlanesByCountry?value=" + document.getElementById("/streamOriginCountry").value, this )
   }
   handleIcao24(){
     connect("/realtime/getPlane?value=" + document.getElementById("/streamAircraft").value, this )
