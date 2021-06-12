@@ -37,7 +37,7 @@ public class ControllerRealTime {
             .flatMapIterable(flights -> flights);
     }
 
-    @GetMapping(value = "/getPlaneByCountry", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/getPlanesByCountry", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<FilghtData> streamByCountry(@RequestParam(name = "value") String country)
     {   
 
