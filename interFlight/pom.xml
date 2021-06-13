@@ -21,12 +21,12 @@
     	<distributionManagement>
 		<repository>
 			<id>central123</id>
-			<name>es2021esp52-releases</name>
+			<name>es2021esp12-releases</name>
 			<url>http://192.168.160.49:8082/artifactory/maven_es2021/</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots123</id>
-			<name>es2021esp52-snapshots</name>
+			<name>es2021esp12-snapshots</name>
 			<url>http://192.168.160.49:8082/artifactory/maven_es2021/</url>
 		</snapshotRepository>
 	</distributionManagement>
@@ -50,6 +50,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <version>2.6.7</version>
             <scope>test</scope>
         </dependency>
         <dependency>
