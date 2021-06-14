@@ -1,7 +1,10 @@
 package glue;
 
 import InterFlight.Dao.FlightRepository;
+import InterFlight.Kafka.KafkaConsumer;
+import InterFlight.Kafka.KafkaProducer;
 import InterFlight.Model.Flight;
+import InterFlight.Services.RealTimeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.Before;
@@ -11,104 +14,88 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FlightSteps {
 
     @Autowired
-    private TestRestTemplate testRestTemplate;
+    private InterFlight.Kafka.KafkaConsumer KafkaConsumer;
 
     @Autowired
-    private FlightRepository flightRepository;
+    private KafkaProducer kafkaProducer;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private RealTimeService realTimeService;
 
-    private List<Flight> expectedFlights;
+    @Value("${test.topic}")
+    private String topic;
 
-    private List<Flight> actualFlights;
+    List<Flight> flights = new ArrayList<>();
+
+    List<String> actualFlights = new ArrayList<>();
+
+
 
     @Before
     public void setup()
     {
-        expectedFlights = new ArrayList<>();
-        actualFlights = new ArrayList<>();
-        flightRepository.deleteAll();
-    }
-
-    @Given("^the following flights$")
-    public void givenTheFollowingFlights(final List<Flight> flights)
-    {
-        expectedFlights.addAll(flights);
-    }
-
-    @Given("^the following flights to the database$")
-    public void giveFlightsToDatabase(List<Flight> flights)
-    {
-        expectedFlights.addAll(flights);
-        flightRepository.saveAll(flights);
-    }
-
-    @Given("^flight must be higher than 0$")
-    public void allFlightsTest()
-    {
 
     }
 
-    @When("^the user wants to access the database$")
-    public void whenUsersRequestsdataFromDB()
+    @Given("^flights from the service$")
+    public void givenTheFollowingFlights()
     {
-        actualFlights.addAll(flightRepository.findAll());
+        flights = realTimeService.getAllPlanes();
+        for(int i = 0 ; i< flights.size() ; i++)
+        {
+            kafkaProducer.sendMessage(topic, flights.get(i).toString());
+            System.out.println("flights->"+flights.toString());
+        }
     }
 
     @When("^the users requests all flights$")
-    public void userRequestsAllFlights()
-    {
-        Flight teste1 = new Flight("4caa57", "Ireland", null,null,null,null);
-        Flight teste2 = new Flight("3c66b6", "Germany", null,null,null,null);
-        actualFlights.add(teste1);
-        actualFlights.add(teste2);
+    public void whenTheUserRequestsAllTheFlights() throws JsonProcessingException, InterruptedException {
+        KafkaConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
+        actualFlights.add(KafkaConsumer.getMessage());
+        System.out.println("flights->"+actualFlights.toString());
     }
-
-    @When("^the user requests specific flights$")
-    public void whenTheUserRequestsAllTheFlights() throws JsonProcessingException {
-        Flight teste1 = new Flight("4caa57", "Ireland", null,null,null,null);
-        Flight teste2 = new Flight("3c66b6", "Germany", null,null,null,null);
-        actualFlights.add(teste1);
-        actualFlights.add(teste2);
-    }
-
-    @Then("^database returns the flights given before$")
-    public void databaseReturnsData()
-    {
-        validateFlights();
-    }
-
 
     @Then("^all requested flights are returned$")
     public void allRequestedFlightsAreReturned()
     {
-        if(actualFlights.size()<=0)
-        {
-            Assertions.assertEquals("-", "ArrayIsEmpty");
-        }
+        assertEquals(actualFlights.size(), flights.size());
     }
 
-    @Then("^all the flights are returned$")
-    public void thenAllTheFlightsAreReturned(){
-        validateFlights();
-    }
-
-    private void validateFlights()
+    @Given("^a country name$")
+    public void countryName()
     {
-        Assertions.assertEquals(expectedFlights.size(), actualFlights.size());
-        for(int i = 0; i< actualFlights.size();i++)
+        flights = realTimeService.getFlightsFiltered("Germany");
+        for(int i = 0 ; i< flights.size() ; i++)
         {
-            Assertions.assertEquals(actualFlights.get(i).getIcao24(), expectedFlights.get(i).getIcao24());
+            kafkaProducer.sendMessage(topic, flights.get(i).toString());
         }
     }
+
+    @When("^the users requests flights from a country$")
+    public void requestsSpecificFlights() throws JsonProcessingException, InterruptedException {
+        KafkaConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
+        actualFlights.add(KafkaConsumer.getMessage());
+    }
+
+    @Then("^return all flights from that country$")
+    public void returnAllSpecificFlights()
+    {
+        assertEquals(actualFlights.size(), flights.size());
+    }
+
+
+
 }
