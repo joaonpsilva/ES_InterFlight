@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(Cucumber.class)
 @CucumberContextConfiguration
@@ -15,6 +18,9 @@ import org.springframework.boot.test.context.SpringBootTest;
                             webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 @CucumberOptions(plugin = {"pretty"}, tags = "",features="src/test/resources/features")
+@ContextConfiguration
+@DirtiesContext
+@EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
 public class CucumberITTest {
     
     @Test
