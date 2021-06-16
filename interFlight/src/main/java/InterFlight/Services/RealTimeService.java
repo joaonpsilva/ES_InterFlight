@@ -1,5 +1,6 @@
 package InterFlight.Services;
 
+import InterFlight.Model.AircraftList;
 import InterFlight.Model.Flight;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -16,23 +17,32 @@ public class RealTimeService {
 
     private static final String flightInfo = "flightInfo";
     private static final String flightterminated = "flightTerminated";
-
+    
     ObjectMapper objectMapper = new ObjectMapper();
     Map<String, Flight> realTimeFlights = new HashMap<>(); 
 
     @KafkaListener(topics = flightInfo, groupId = "1")
     public void consumeUpdate(String message) throws IOException {
-        System.out.println("## -> REALTIME Consumed message -> " +message);
+        //System.out.println("## -> REALTIME Consumed message -> " +message);
         Flight flight = objectMapper.readValue(message, Flight.class);
         
-        realTimeFlights.put(flight.getIcao24(), flight);
+        Flight flightWithDetails;
+        if(AircraftList.checkExistence(flight.getIcao24()))
+        {
+            flightWithDetails = AircraftList.mergeDetails(flight);
+            System.out.println("## -> REALTIME Consumed message -> " +flightWithDetails.toString());
+            realTimeFlights.put(flight.getIcao24(), flightWithDetails);
+        }
+        
+        
+        //realTimeFlights.put(flight.getIcao24(), flight);
     }
 
     @KafkaListener(topics = flightterminated, groupId = "1")    //remove flights from the list
     public void consumeTerminated(String message) throws IOException {
-        System.out.println("## -> REALTIME Flight Over -> " +message);
+        //System.out.println("## -> REALTIME Flight Over -> " +message);
         Flight flight = objectMapper.readValue(message, Flight.class);
-        
+        System.out.println("## -> REALTIME Flight Over -> " + flight.toString());
         realTimeFlights.remove(flight.getIcao24());
     }
     
