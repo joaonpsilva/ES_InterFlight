@@ -1,6 +1,7 @@
 package InterFlight.Services;
 
 import InterFlight.Dao.FlightRepository;
+import InterFlight.Model.AircraftList;
 import InterFlight.Model.Flight;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -13,20 +14,25 @@ import java.util.Map;
 public class FlightHistoryService {
 
     private static final String flighInitiated = "flightInitiaded";
-
+    private Flight flightWithDetails;
     ObjectMapper objectMapper = new ObjectMapper();
     FlightRepository repo;
 
     @KafkaListener(topics = flighInitiated, groupId = "1")
     public void consumeInitiaded(String message) throws IOException {
-        System.out.println("## -> Flight Initiaded -> " +message);
+        //System.out.println("## -> Flight Initiaded -> " +message);
         Flight flight = objectMapper.readValue(message, Flight.class);
-        repo.save(flight);
+        if(AircraftList.checkExistence(flight.getIcao24()))
+        {
+            flightWithDetails = AircraftList.mergeDetails(flight);
+            System.out.println("## -> Flight Initiaded and saved to repo: " +flightWithDetails.toString());
+            repo.save(flightWithDetails);
+        }
+        //repo.save(flight);
     }
 
     public ArrayList<Flight> getNumPlanesOrigin(String originCountry){
         return (ArrayList<Flight>) repo.findByOriginCountry(originCountry);
     }
-
-
+    
 }

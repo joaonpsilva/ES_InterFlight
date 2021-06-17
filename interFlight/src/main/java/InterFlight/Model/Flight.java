@@ -3,7 +3,6 @@ package InterFlight.Model;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.sun.istack.NotNull;
 
-import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -11,8 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
 @Entity
+@AllArgsConstructor
 @Table(name = "flight")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Flight implements Serializable{
@@ -20,14 +23,15 @@ public class Flight implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String icao24;
-    private String originCountry;
-    private String last_contact;
-    private Float longitude;
-    private Float latitude;
-    private Float velocity;
-    private static Logger logger = Logger.getLogger(Flight.class);
-
+    private String icao24, originCountry, last_contact;
+    private Float longitude, latitude, velocity;
+    
+    //novos atrb com os detalhes de cada aviao
+    private String registration, manufacturername, model, owner, operator, callSign;
+    
+    
+    
+    
     protected Flight()
     {
     }
@@ -40,7 +44,19 @@ public class Flight implements Serializable{
         this.latitude = latitude;
         this.velocity = velocity;
     }
+    
+    // construtor a ser usado na classe AircraftList
+    public Flight(String icao24, String registration, String manufacturername, String model, String owner, String operator) {
+        this.icao24 = icao24;
+        this.registration = registration;
+        this.manufacturername = manufacturername;
+        this.model = model;
+        this.owner = owner;
+        this.operator = operator;
+    }
 
+    
+    /*
     @Override
     public String toString() {
         return "{" +
@@ -51,6 +67,24 @@ public class Flight implements Serializable{
             ", velocity='" + getVelocity() + "'" +
             "}";
     }
+    */
+    
+    @Override
+    public String toString() {
+        return "{" +
+            " icao24='" + getIcao24() + "'" +
+            ", last_contact='" + getLast_contact() + "'" +
+            ", longitude='" + getLongitude() + "'" +
+            ", latitude='" + getLatitude() + "'" +
+            ", velocity='" + getVelocity() + "'" +
+            ", registration='" + getRegistration() + "'" +
+            ", manufacturername='" + getManufacturername() + "'" +
+            ", model='" + getModel() + "'" +
+            ", owner='" + getOwner() + "'" +
+            ", operator='" + getOperator() + "'" +
+            "}";
+    }
+    
 
     @Override
     public boolean equals(Object other){
@@ -84,7 +118,7 @@ public class Flight implements Serializable{
     public String getLast_contact() {
         return last_contact;
     }
-    
+
         /**
      * @return the id
      */
@@ -167,20 +201,6 @@ public class Flight implements Serializable{
      */
     public void setVelocity(Float velocity) {
         this.velocity = velocity;
-    }
-
-    /**
-     * @return the logger
-     */
-    public static Logger getLogger() {
-        return logger;
-    }
-
-    /**
-     * @param aLogger the logger to set
-     */
-    public static void setLogger(Logger aLogger) {
-        logger = aLogger;
     }
 
 }
