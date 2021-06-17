@@ -1,3 +1,4 @@
 interFlight/.idea/*
 InterFlight/src/test/java/ControllerStoragedDataTest.java
 /interflight-frontend/nbproject/private/
+*.class
