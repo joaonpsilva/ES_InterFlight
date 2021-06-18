@@ -40,7 +40,11 @@ public class FlightSteps {
 
     List<Flight> flights = new ArrayList<>();
 
-    List<String> actualFlights = new ArrayList<>();
+    List<Flight> actualFlights = new ArrayList<>();
+
+    Flight actualFlight;
+
+    String countryName;
 
 
 
@@ -51,20 +55,20 @@ public class FlightSteps {
     }
 
     @Given("^flights from the service$")
-    public void givenTheFollowingFlights()
+    public void givenTheFollowingFlights(final List<Flight> flights)
     {
-        flights = realTimeService.getAllPlanes();
-        for(int i = 0 ; i< flights.size() ; i++)
-        {
-            kafkaProducer.sendMessage(topic, flights.get(i).toString());
-            System.out.println("flights->"+flights.toString());
-        }
+
+       for(int i = 0 ; i<flights.size() ; i++)
+       {
+           kafkaProducer.sendMessage(topic, flights.get(i).toString());
+       }
+
     }
 
     @When("^the users requests all flights$")
     public void whenTheUserRequestsAllTheFlights() throws JsonProcessingException, InterruptedException {
         KafkaConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
-        actualFlights.add(KafkaConsumer.getMessage());
+        actualFlights = realTimeService.getAllPlanes();
         System.out.println("flights->"+actualFlights.toString());
     }
 
@@ -75,10 +79,12 @@ public class FlightSteps {
     }
 
     @Given("^a country name$")
-    public void countryName()
+    public void countryName(final String countryName)
     {
-        flights = realTimeService.getFlightsFiltered("Germany");
-        for(int i = 0 ; i< flights.size() ; i++)
+
+        this.countryName = countryName;
+
+        for(int i = 0 ; i<flights.size() ; i++)
         {
             kafkaProducer.sendMessage(topic, flights.get(i).toString());
         }
@@ -87,13 +93,42 @@ public class FlightSteps {
     @When("^the users requests flights from a country$")
     public void requestsSpecificFlights() throws JsonProcessingException, InterruptedException {
         KafkaConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
-        actualFlights.add(KafkaConsumer.getMessage());
+        actualFlights = realTimeService.getAllPlanes();
     }
 
     @Then("^return all flights from that country$")
     public void returnAllSpecificFlights()
     {
-        assertEquals(actualFlights.size(), flights.size());
+        for(int i = 0 ; i<flights.size() ; i++)
+        {
+            if(!flights.get(i).toString().contains(countryName))
+            {
+                assertEquals(actualFlights.size(), flights.size());
+            }
+        }
+    }
+
+
+    @Given("^some flights$")
+    public void specificPlane(final List<Flight> flights)
+    {
+        this.flights = flights;
+        for(int i = 0 ; i<flights.size() ; i++)
+        {
+            kafkaProducer.sendMessage(topic, flights.get(i).toString());
+        }
+    }
+
+    @When("^the user requests one type of plane$")
+    public void oneType(final String type) throws JsonProcessingException, InterruptedException {
+        KafkaConsumer.getLatch().await(10000, TimeUnit.MILLISECONDS);
+        Flight actualFlight = realTimeService.getSpecificPlane(type);
+    }
+
+    @Then("^return all flights from that type of plane$")
+    public void specificFlightOne()
+    {
+        assertEquals(actualFlight, flights.get(0));
     }
 
 
