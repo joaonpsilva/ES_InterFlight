@@ -33,13 +33,14 @@ services:
       - esp12  
 
 
- zookeeper:
+  zookeeper:
     image: wurstmeister/zookeeper
     container_name: zookeeper
     expose:
       - 2181
     ports:
       - 2181:2181
+      
   kafka: 
     image: wurstmeister/kafka
     container_name: kafka
