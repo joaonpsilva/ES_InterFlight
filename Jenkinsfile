@@ -183,8 +183,8 @@ pipeline {
 
                     //sshPut(from: './logstash/pipeline/logstash.conf', remote: remote, into: '/home/esp12/logstash')
                     sshPut(from: 'docker-compose.yml', remote: remote, into: '/home/esp12')
-                    sshCommand remote: remote, command: '/bin/bash -c 'docker-compose pull''
-                    sshCommand remote: remote, command: '/bin/bash -c 'docker-compose up -d''
+                    sshCommand remote: remote, command: '/bin/bash -c \'docker-compose pull\''
+                    sshCommand remote: remote, command: '/bin/bash -c \'docker-compose up -d\''
                     
                 }
             }
