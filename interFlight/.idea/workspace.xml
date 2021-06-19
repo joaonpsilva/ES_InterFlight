@@ -42,11 +42,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Sensors" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\migue\OneDrive\Documentos\GitHub\ES_InterFlight\interFlight\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Kafka" />
@@ -152,7 +155,7 @@
       <workItem from="1623530647903" duration="723000" />
       <workItem from="1623589053710" duration="9800000" />
       <workItem from="1624043850571" duration="3093000" />
-      <workItem from="1624107581075" duration="3596000" />
+      <workItem from="1624107581075" duration="4843000" />
     </task>
     <servers />
   </component>
@@ -176,22 +179,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1624108853246" />
-    <state width="1493" height="160" key="GridCell.Tab.0.bottom" timestamp="1624046519512">
+    <state width="1493" height="331" key="GridCell.Tab.0.bottom" timestamp="1624113239770">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1624046519512" />
-    <state width="1493" height="160" key="GridCell.Tab.0.center" timestamp="1624046519512">
+    <state width="1493" height="331" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1624113239770" />
+    <state width="1493" height="331" key="GridCell.Tab.0.center" timestamp="1624113239769">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1624046519512" />
-    <state width="1493" height="160" key="GridCell.Tab.0.left" timestamp="1624046519511">
+    <state width="1493" height="331" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1624113239769" />
+    <state width="1493" height="331" key="GridCell.Tab.0.left" timestamp="1624113239769">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1624046519511" />
-    <state width="1493" height="160" key="GridCell.Tab.0.right" timestamp="1624046519512">
+    <state width="1493" height="331" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1624113239769" />
+    <state width="1493" height="331" key="GridCell.Tab.0.right" timestamp="1624113239769">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="160" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1624046519512" />
+    <state width="1493" height="331" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1624113239769" />
     <state width="1493" height="127" key="GridCell.Tab.1.bottom" timestamp="1624044833717">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

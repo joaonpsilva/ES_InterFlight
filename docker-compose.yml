@@ -10,9 +10,11 @@ services:
     expose:
       - "12026" 
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.160.18:5432/airtrafficDB?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-      - SPRING_DATASOURCE_USERNAME=admin
-      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_DATASOURCE_URL=jdbc:mysql://192.168.160.18:3306/airtrafficDB?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=mysql
+    networks:
+      - esp12     
     depends_on: 
       - zookeeper
       - kafka
@@ -26,6 +28,8 @@ services:
     depends_on: 
       - zookeeper
       - kafka
+    networks:
+      - esp12  
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -48,3 +52,6 @@ services:
     depends_on: 
       - zookeeper
 
+networks:
+  esp12:
+    driver: bridge

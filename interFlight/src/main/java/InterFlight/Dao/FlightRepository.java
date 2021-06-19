@@ -12,4 +12,5 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
   Flight findById(long id);
   List<Flight> findByIcao24(String icao);
   List<Flight> findByOriginCountry(String originCountry);
+
 }

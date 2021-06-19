@@ -1,0 +1,11 @@
+server:
+  port: 12026
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/airtrafficDB?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: palavrapasse
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    hibernate.ddl-auto: update
