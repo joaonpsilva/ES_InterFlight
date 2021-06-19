@@ -9,11 +9,3 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL57Dialect
     hibernate.ddl-auto: update
-  kafka:
-    consumer:
-      #bootstrap-servers: 172.0.0.16:9092
-      bootstrap-servers: 192.168.160.18:9092
-      group-id: "1"
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
