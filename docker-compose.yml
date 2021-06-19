@@ -10,8 +10,8 @@ services:
     expose:
       - "12026" 
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.160.18:21002/airtrafficDB?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.160.18:5432/airtrafficDB?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=admin
     depends_on: 
       - zookeeper
