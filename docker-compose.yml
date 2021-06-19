@@ -3,7 +3,7 @@ version: '2'
 services:     
   
   interFlightService:
-    image: 192.168.160.48:5000/es_interflight/interflight
+    image: 192.168.160.48:5000/es_interflight/interflight:latest
     container_name: esp12_interflight
     ports: 
       - "12026:12026"
@@ -19,8 +19,9 @@ services:
       - zookeeper
       - kafka
 
+  #Sensor
   sensorsService:
-    image: 192.168.160.48:5000/es_interflight/sensors
+    image: 192.168.160.48:5000/es_interflight/sensors:latest
     container_name: esp12_sensors
     ports: 
       - "12025:12025"
@@ -32,6 +33,22 @@ services:
     networks:
       - esp12  
 
+  # Frontend Service
+  frontend:
+    image: 192.168.160.48:5000/es_interflight/frontend:latest
+    container_name: esp12_frontend
+    ports:
+      - "12027:8080"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on: 
+      - zookeeper
+      - kafka
+    networks:
+      - esp12
+      
+
+
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -40,7 +57,7 @@ services:
       - 2181
     ports:
       - 2181:2181
-      
+
   kafka: 
     image: wurstmeister/kafka
     container_name: kafka

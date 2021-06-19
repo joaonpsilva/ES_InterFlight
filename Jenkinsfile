@@ -13,6 +13,8 @@ pipeline {
         registry2 = 'esp12/interflight'
         registryCredential = 'esp12dockerhub'
         dockerImage = ''
+        dockerImage2 = ''
+        dockerImage3 = ''
     }
 
     stages {
@@ -110,7 +112,19 @@ pipeline {
                                         }
                                 }
                             }
-                        }
+                        },
+                    frontEnd: {
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                sh "chmod +x -R ${env.WORKSPACE}"
+                                sh 'echo "Creating Docker Image on InterFlight"'
+                                script {
+                                    docker.withRegistry("http://192.168.160.48:5000") {
+                                        dockerImage3 = docker.build("es_interflight/frontend", "interflight-frontend")
+                                        
+                                        }
+                                }
+                            }
+                        }                        
                 )
             }
         }
@@ -144,7 +158,21 @@ pipeline {
                                 }
                             }
                         }
-                    }
+                    },
+                    frontEnd: {
+                        dir('interFlight') {
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                sh "chmod +x -R ${env.WORKSPACE}"
+                                sh 'echo "Pushing Docker Image on InterFlight"'
+                                script {
+                                    docker.withRegistry("http://192.168.160.48:5000") {
+                                        dockerImage3.push()
+                                        dockerImage3.push('latest')
+                                    }
+                                }
+                            }
+                        }
+                    }                    
                 )
             }
         }
@@ -179,6 +207,13 @@ pipeline {
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/es_interflight/interflight"
                     //sshCommand remote: remote, command: "docker create -p 12026:12026 --name esp12_interflight 192.168.160.48:5000/es_interflight/interflight"
                     //sshCommand remote: remote, command: "docker start esp12_interflight"
+
+                    sshCommand remote: remote, command: 'docker stop esp12_frontend || echo "Do not have that image"'
+                    sshCommand remote: remote, command: 'docker rm esp12_frontend || echo "Do not have that image"'
+                    sshCommand remote: remote, command: 'docker rmi 192.168.160.48:5000/es_interflight/frontend || echo "Do not have that image"'
+                    sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/es_interflight/frontend"
+                    //sshCommand remote: remote, command: "docker create -p 12027:12027 --name esp12_frontend 192.168.160.48:5000/es_interflight/frontend"
+                    //sshCommand remote: remote, command: "docker start esp12_frontend"
 
 
                     //sshPut(from: './logstash/pipeline/logstash.conf', remote: remote, into: '/home/esp12/logstash')
