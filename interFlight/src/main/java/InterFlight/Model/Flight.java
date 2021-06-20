@@ -9,6 +9,7 @@ import java.io.Serializable;
 import static java.lang.String.valueOf;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -43,19 +44,21 @@ public class Flight implements Serializable{
         this.last_contact = last_contact;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.velocity = velocity;
-        LocalDateTime now = LocalDateTime.now();  
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formatDateTime = now.format(format);  
-        this.date =  formatDateTime;  
-        System.out.println("-----------------------------+++++++++++++++++++++------------"+ this.date);
-
+        this.velocity = velocity;        
     }
 
+    public void setDate() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String formatDateTime = now.format(format);    
+        this.date = formatDateTime;
+    }
+   
     public String getDate() {
         return date;
     }
 
+    
     @Override
     public String toString() {
         return "{" +

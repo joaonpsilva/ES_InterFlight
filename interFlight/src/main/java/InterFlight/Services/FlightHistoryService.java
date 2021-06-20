@@ -24,8 +24,7 @@ public class FlightHistoryService {
     public void consumeInitiaded(String message) throws IOException {
         System.out.println("## -> HISTORY Consumed message -> " +message);
         Flight flight = objectMapper.readValue(message, Flight.class);
-        System.out.println("-----------------------------+++++++++++++++++++++------------"+ flight.getDate());
-
+        flight.setDate();
         repo.save(flight);
     }
 
