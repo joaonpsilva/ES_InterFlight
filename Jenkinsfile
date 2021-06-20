@@ -160,10 +160,10 @@ pipeline {
                         }
                     },
                     frontEnd: {
-                        dir('interFlight') {
+                        dir('frontEnd') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Pushing Docker Image on InterFlight"'
+                                sh 'echo "Pushing Docker Image on frontEnd"'
                                 script {
                                     docker.withRegistry("http://192.168.160.48:5000") {
                                         dockerImage3.push()
