@@ -14,6 +14,8 @@ RUN npm install react-scripts@3.4.1 -g --silent
 RUN npm install react react-dom leaflet
 RUN npm install react-leaflet
 RUN npm install -D @types/leaflet
+
+EXPOSE 3001
 # add app
 COPY . ./
 
