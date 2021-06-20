@@ -2,10 +2,16 @@ package InterFlight.Model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.sun.istack.NotNull;
+import io.cucumber.messages.Messages.Timestamp;
 
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
+import static java.lang.String.valueOf;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +32,7 @@ public class Flight implements Serializable{
     private Float longitude;
     private Float latitude;
     private Float velocity;
+    private String date;
     private static Logger logger = Logger.getLogger(Flight.class);
 
     protected Flight()
@@ -39,6 +46,16 @@ public class Flight implements Serializable{
         this.longitude = longitude;
         this.latitude = latitude;
         this.velocity = velocity;
+        LocalDateTime now = LocalDateTime.now();  
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formatDateTime = now.format(format);  
+        this.date =  formatDateTime;  
+        System.out.println("-----------------------------+++++++++++++++++++++------------"+ this.date);
+
+    }
+
+    public String getDate() {
+        return date;
     }
 
     @Override
@@ -182,5 +199,14 @@ public class Flight implements Serializable{
     public static void setLogger(Logger aLogger) {
         logger = aLogger;
     }
+    
+    public String convertLast_contact() {
 
+        int seconds = (int)(System.currentTimeMillis() / 1000L - Long.valueOf(last_contact));
+        int minutes = seconds / 60; 
+        seconds %= 60;
+        String s = minutes + ":" + String.format("%02d", seconds);
+        System.out.println("**********************************"+s);
+        return s;
+    } 
 }
