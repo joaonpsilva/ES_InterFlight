@@ -1,0 +1,6 @@
+[2021-06-14 12:38:27,700] [main] [Could not open ObjectInputStream to Socket[addr=/127.0.0.1,port=39362,localport=9999]]
+java.io.StreamCorruptedException: invalid stream header: 7B227469
+	at java.base/java.io.ObjectInputStream.readStreamHeader(ObjectInputStream.java:940)
+	at java.base/java.io.ObjectInputStream.<init>(ObjectInputStream.java:379)
+	at org.apache.log4j.net.SocketNode.<init>(SocketNode.java:56)
+	at org.apache.log4j.net.SimpleSocketServer.main(SimpleSocketServer.java:67)

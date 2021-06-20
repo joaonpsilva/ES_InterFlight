@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.sun.istack.NotNull;
 import io.cucumber.messages.Messages.Timestamp;
 
-import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import static java.lang.String.valueOf;
@@ -33,7 +32,6 @@ public class Flight implements Serializable{
     private Float latitude;
     private Float velocity;
     private String date;
-    private static Logger logger = Logger.getLogger(Flight.class);
 
     protected Flight()
     {
@@ -186,27 +184,4 @@ public class Flight implements Serializable{
         this.velocity = velocity;
     }
 
-    /**
-     * @return the logger
-     */
-    public static Logger getLogger() {
-        return logger;
-    }
-
-    /**
-     * @param aLogger the logger to set
-     */
-    public static void setLogger(Logger aLogger) {
-        logger = aLogger;
-    }
-    
-    public String convertLast_contact() {
-
-        int seconds = (int)(System.currentTimeMillis() / 1000L - Long.valueOf(last_contact));
-        int minutes = seconds / 60; 
-        seconds %= 60;
-        String s = minutes + ":" + String.format("%02d", seconds);
-        System.out.println("**********************************"+s);
-        return s;
-    } 
 }

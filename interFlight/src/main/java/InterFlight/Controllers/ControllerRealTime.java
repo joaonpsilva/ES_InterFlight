@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.MediaType;
 import reactor.core.publisher.Flux;
 import java.time.Duration;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 @RestController
 @CrossOrigin
@@ -26,7 +28,9 @@ public class ControllerRealTime {
     
     @Autowired
     RealTimeService realtimeService;
-    
+
+    final static Logger logger = LogManager.getLogger(ControllerRealTime.class);
+
 
     @GetMapping(value = "/getPlane", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<FilghtData> streamAircraft(@RequestParam(name = "value") String plane)
@@ -50,7 +54,8 @@ public class ControllerRealTime {
     @GetMapping(value = "/getAllPlanes", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<FilghtData> streamAll()
     {   
-
+        //https://howtodoinjava.com/log4j2/log4j-2-xml-configuration-example/
+        logger.info("Getting all Planes");
         return Flux.interval(Duration.ofSeconds(0), Duration.ofSeconds(12))
             .map(interval -> Collections.singletonList(new FilghtData(realtimeService.getAllPlanes())))
             .flatMapIterable(flights -> flights);

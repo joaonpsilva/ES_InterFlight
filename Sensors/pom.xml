@@ -17,6 +17,20 @@
 		<java.version>8</java.version>
                 <start-class>InterFlight.Sensors.SensorsApplication</start-class>                
 	</properties>
+	<distributionManagement>
+		<repository>
+			<id>central123</id>
+			<name>es2021esp52-releases</name>
+			<url>http://192.168.160.49:8082/artifactory/maven_es2021/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots123</id>
+			<name>es2021esp52-snapshots</name>
+			<url>http://192.168.160.49:8082/artifactory/maven_es2021/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
