@@ -39,7 +39,7 @@ services:
     container_name: esp12_frontend
     ports:
       - "12027:12027"
-    espose: 
+    expose: 
       - "12027"
     environment:
       - CHOKIDAR_USEPOLLING=true
