@@ -26,7 +26,7 @@ public class KafkaConfiguration {
     public ProducerFactory producerFactory(){
 
         Map<String, Object> config = new HashMap<>();
-        
+
  
         return new DefaultKafkaProducerFactory(config);
     }
