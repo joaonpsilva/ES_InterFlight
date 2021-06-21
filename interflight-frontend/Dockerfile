@@ -15,9 +15,10 @@ RUN npm install react react-dom leaflet
 RUN npm install react-leaflet
 RUN npm install -D @types/leaflet
 
-EXPOSE 3001
 # add app
 COPY . ./
+
+EXPOSE 3000
 
 # start app
 CMD ["npm", "start"]

@@ -4,7 +4,7 @@ class Stream{
 
     constructor(endpoint, component){
         this.component = component
-        this.endpoint = "http://localhost:8080" + endpoint
+        this.endpoint = "http://192.168.160.87:12026/" + endpoint
         console.log(endpoint)
         this.source = null
     }

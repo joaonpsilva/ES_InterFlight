@@ -93,7 +93,8 @@ pipeline {
                 parallel(
                     sensors: {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
+                                //sh "chmod +x -R ${env.WORKSPACE}"
+                                sh 'echo "Creating Docker Image on Sensors"'
                                 script {
                                     docker.withRegistry("http://192.168.160.48:5000") {
                                         dockerImage = docker.build("es_interflight/sensors", "Sensors")
@@ -103,7 +104,7 @@ pipeline {
                     },
                     interFlight: {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
+                                //sh "chmod +x -R ${env.WORKSPACE}"
                                 sh 'echo "Creating Docker Image on InterFlight"'
                                 script {
                                     docker.withRegistry("http://192.168.160.48:5000") {
@@ -115,8 +116,8 @@ pipeline {
                         },
                     frontEnd: {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Creating Docker Image on InterFlight"'
+                                //sh "chmod +x -R ${env.WORKSPACE}"
+                                sh 'echo "Creating Docker Image on frontEnd"'
                                 script {
                                     docker.withRegistry("http://192.168.160.48:5000") {
                                         dockerImage3 = docker.build("es_interflight/frontend", "interflight-frontend")
@@ -132,43 +133,37 @@ pipeline {
             steps {
                 parallel(
                     sensors: {
-                        dir('Sensors') {
-                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Pushing Docker Image on Sensors"'
-                                script {
-                                    docker.withRegistry("http://192.168.160.48:5000") {
-                                        dockerImage.push()
-                                        dockerImage.push('latest')
-                                    }
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            //sh "chmod +x -R ${env.WORKSPACE}"
+                            sh 'echo "Pushing Docker Image on Sensors"'
+                            script {
+                                docker.withRegistry("http://192.168.160.48:5000") {
+                                    dockerImage.push()
+                                    dockerImage.push('latest')
                                 }
                             }
                         }
                     },
                     interFlight: {
-                        dir('interFlight') {
-                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Pushing Docker Image on InterFlight"'
-                                script {
-                                    docker.withRegistry("http://192.168.160.48:5000") {
-                                        dockerImage2.push()
-                                        dockerImage2.push('latest')
-                                    }
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            //sh "chmod +x -R ${env.WORKSPACE}"
+                            sh 'echo "Pushing Docker Image on InterFlight"'
+                            script {
+                                docker.withRegistry("http://192.168.160.48:5000") {
+                                    dockerImage2.push()
+                                    dockerImage2.push('latest')
                                 }
                             }
-                        }
+                        }   
                     },
-                    frontEnd: {
-                        dir('frontEnd') {
-                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh 'echo "Pushing Docker Image on frontEnd"'
-                                script {
-                                    docker.withRegistry("http://192.168.160.48:5000") {
-                                        dockerImage3.push()
-                                        dockerImage3.push('latest')
-                                    }
+                    frontEnd: {                    
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            //sh "chmod +x -R ${env.WORKSPACE}"
+                            sh 'echo "Pushing Docker Image on frontEnd"'
+                            script {
+                                docker.withRegistry("http://192.168.160.48:5000") {
+                                    dockerImage3.push()
+                                    dockerImage3.push('latest')
                                 }
                             }
                         }
