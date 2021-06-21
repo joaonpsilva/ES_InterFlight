@@ -22,6 +22,9 @@ import org.springframework.test.context.ContextConfiguration;
 @DirtiesContext
 @EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
 public class CucumberITTest {
+  
+    @Autowired
+    private MockMvc mockMvc;
     
     @Test
     void getPlane(){
