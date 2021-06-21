@@ -66,7 +66,6 @@ services:
     ports:
       - 9092:9092
     environment: 
-      KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       #KAFKA_CREATE_TOPICS: "flightInfo:1:1, flightTerminated:1:1, flightInitiated:1:1"
     depends_on: 
