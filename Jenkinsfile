@@ -17,8 +17,8 @@ pipeline {
         dockerImage3 = ''
     }
 
-    /*stages {
-        stage('Testing Stage') {
+    stages {
+       /* stage('Testing Stage') {
             steps {
                 parallel(
                     sensors: {
