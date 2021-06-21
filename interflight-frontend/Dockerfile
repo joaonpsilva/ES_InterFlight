@@ -18,7 +18,7 @@ RUN npm install -D @types/leaflet
 # add app
 COPY . ./
 
-EXPOSE 3000
+EXPOSE 3001
 
 # start app
 CMD ["npm", "start"]
