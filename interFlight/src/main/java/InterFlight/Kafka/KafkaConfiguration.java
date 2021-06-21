@@ -30,7 +30,7 @@ public class KafkaConfiguration {
     public ConsumerFactory<String, String> consumerFactory(){
 
         Map<String, Object> config = new HashMap<>();
-        
+
         return new DefaultKafkaConsumerFactory(config);
     }
 
