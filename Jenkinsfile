@@ -18,7 +18,7 @@ pipeline {
     }
 
     stages {
-       /* stage('Testing Stage') {
+        stage('Testing Stage') {
             steps {
                 parallel(
                     sensors: {
@@ -43,7 +43,7 @@ pipeline {
                 )
             }
         }
-     */
+     
 
 
 
@@ -208,8 +208,8 @@ pipeline {
                     sshCommand remote: remote, command: 'docker rmi 192.168.160.48:5000/es_interflight/frontend || echo "Do not have that image"'
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/es_interflight/frontend"
                     //sshCommand remote: remote, command: "docker run -it -d -p 12027:3000 -e CHOKIDAR_USEPOLLING=true --name esp12_frontend 192.168.160.48:5000/es_interflight/frontend"
-                    sshCommand remote: remote, command: "docker create -p 12027:300 --name esp12_frontend 192.168.160.48:5000/es_interflight/frontend"
-                    sshCommand remote: remote, command: "docker start esp12_frontend"
+                    //sshCommand remote: remote, command: "docker create -p 12027:300 --name esp12_frontend 192.168.160.48:5000/es_interflight/frontend"
+                    //sshCommand remote: remote, command: "docker start esp12_frontend"
                     //
                     //sshPut(from: './logstash/pipeline/logstash.conf', remote: remote, into: '/home/esp12/logstash')
                     sshPut(from: 'docker-compose.yml', remote: remote, into: '/home/esp12')
