@@ -1,4 +1,4 @@
 CucumberConfiguration.class
-CucumberITTest.class
-InterFlight/SensorsApplicationTests.class
+InterFlight/Kafka/KafkaConsumer.class
 glue/FlightSteps.class
+InterFlight/Kafka/KafkaProducer.class

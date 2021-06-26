@@ -7,26 +7,33 @@ import org.springframework.kafka.annotation.KafkaListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class FlightHistoryService {
 
-    private static final String flighInitiated = "flightInitiaded";
+    private static final String flightinit = "flightInitiated";
 
     ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
     FlightRepository repo;
 
-    @KafkaListener(topics = flighInitiated, groupId = "1")
+    @KafkaListener(topics = flightinit, groupId = "1")
     public void consumeInitiaded(String message) throws IOException {
-        System.out.println("## -> Flight Initiaded -> " +message);
+        System.out.println("## -> HISTORY Consumed message -> " +message);
         Flight flight = objectMapper.readValue(message, Flight.class);
+        flight.setDate();
         repo.save(flight);
     }
 
-    public ArrayList<Flight> getNumPlanesOrigin(String originCountry){
-        return (ArrayList<Flight>) repo.findByOriginCountry(originCountry);
+    public ArrayList<Flight> getByPlanesByOrigin(String originCountry){
+        return  (ArrayList<Flight>) repo.findByOriginCountry(originCountry);
     }
 
+    public ArrayList<Flight> getAllPLanes(){
+        return (ArrayList<Flight>) repo.findAll();
+    }
 
 }

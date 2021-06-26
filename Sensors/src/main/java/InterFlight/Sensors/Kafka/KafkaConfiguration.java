@@ -21,7 +21,7 @@ import InterFlight.Sensors.Model.Flight;
 
 @Configuration
 public class KafkaConfiguration {
-
+    
     @Bean
     public ProducerFactory producerFactory(){
 

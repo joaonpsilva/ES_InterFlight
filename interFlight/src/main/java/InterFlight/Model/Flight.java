@@ -2,9 +2,16 @@ package InterFlight.Model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.sun.istack.NotNull;
+import io.cucumber.messages.Messages.Timestamp;
 
 
 import java.io.Serializable;
+import static java.lang.String.valueOf;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +32,7 @@ public class Flight implements Serializable{
     private Float longitude;
     private Float latitude;
     private Float velocity;
+    private String date;
 
     protected Flight()
     {
@@ -36,9 +44,21 @@ public class Flight implements Serializable{
         this.last_contact = last_contact;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.velocity = velocity;
+        this.velocity = velocity;        
     }
 
+    public void setDate() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String formatDateTime = now.format(format);    
+        this.date = formatDateTime;
+    }
+   
+    public String getDate() {
+        return date;
+    }
+
+    
     @Override
     public String toString() {
         return "{" +

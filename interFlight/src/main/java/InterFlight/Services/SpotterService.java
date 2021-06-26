@@ -26,7 +26,7 @@ public class SpotterService {
 
     @KafkaListener(topics = flightInfo, groupId = "2")
     public void consumeUpdate(String message) throws IOException {
-        System.out.println("## -> SPOTTER Consumed message -> " +message);
+        //System.out.println("## -> SPOTTER Consumed message -> " +message);
         Flight flight = objectMapper.readValue(message, Flight.class);
         String model = InferModel(flight.getIcao24());
         if (!knownmodels.containsKey(model))
@@ -42,7 +42,7 @@ public class SpotterService {
 
     @KafkaListener(topics = flightterminated, groupId = "2")    //remove flights from the list
     public void consumeTerminated(String message) throws IOException {
-        System.out.println("## -> SPOTTER Flight Over -> " +message);
+        //System.out.println("## -> SPOTTER Flight Over -> " +message);
 
         Flight flight = objectMapper.readValue(message, Flight.class);
         String model = InferModel(flight.getIcao24());

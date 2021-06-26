@@ -70,7 +70,7 @@ public class Flight implements Serializable{
 
     public String getLast_contact() {
 
-        int seconds = (int) (System.currentTimeMillis() / 1000L - last_contact);
+        int seconds = (int) (System.currentTimeMillis() / 1000L - (last_contact - 120));
         int minutes = seconds / 60; 
         seconds %= 60;
         String s = minutes + ":" + String.format("%02d", seconds);
